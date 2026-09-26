@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    min-height: 100dvh;
+    /* Instrument Sans kerns "1." and ".1" so tightly that 1.10% reads as
+       110%. Figures matter more than letter pairs here, so the interface face
+       runs unkerned; the Fraunces display face keeps its kerning. */
+    font-kerning: none;
+  }
+  .font-display,
+  .h-display {
+    font-kerning: normal;
+  }
+  [id] {
+    scroll-margin-top: 88px;
+  }
+  ::selection {
+    background: #c9821a;
+    color: #11201b;
+  }
+  :focus-visible {
+    outline: 2px solid #c9821a;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  .font-mono,
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-[13px] uppercase tracking-[0.08em] text-muted;
+  }
+  .label-mono {
+    @apply font-mono text-[11px] tracking-[0.06em] text-muted;
+  }
+  .h-display {
+    @apply font-display font-normal tracking-[-0.02em];
+  }
+  .card {
+    @apply rounded-panel border border-line bg-white;
+  }
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-control px-5 text-[15px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply btn bg-ink text-paper hover:bg-ink-5;
+  }
+  .btn-secondary {
+    @apply btn border border-ink text-ink hover:bg-ink hover:text-paper;
+  }
+  .btn-amber {
+    @apply btn bg-fat text-ink hover:bg-[#b87512];
+  }
+  .btn-danger {
+    @apply btn bg-loss text-white hover:bg-[#9c3a24];
+  }
+  .field {
+    @apply min-h-[44px] w-full rounded-control border border-line-strong bg-white px-3.5 py-2.5 font-mono text-[18px] text-ink;
+  }
+}
+
+/* Hero ledger card: rows are revealed by script when motion is allowed. */
+[data-motion] .reveal-pending {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.reveal {
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-slip,
+  .print-slip * {
+    visibility: visible;
+  }
+  .print-slip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 58mm;
+    display: block !important;
+  }
+  @page {
+    size: 58mm auto;
+    margin: 2mm;
+  }
+}
+
+/* Scroll story on the homepage (components/site/ScrollDesk.tsx). */
+.desk { --kx: 1; --ky: 1; --s: 1; }
+@media (max-width: 900px) { .desk { --kx: 0.62; --ky: 1; --s: 0.85; } }
+@media (max-width: 560px) { .desk { --kx: 0.26; --ky: 0.95; --s: 0.62; } }
+.desk-scroll { --m: clamp(0, calc((var(--p) - 0.12) / 0.5), 1); --f: clamp(0, calc((var(--p) - 0.45) * 3.2), 1); --a: clamp(0, calc((var(--p) - 0.55) * 3.2), 1); }
+.desk-item {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%)
+    translate(calc(var(--x) * var(--kx) * (1 - var(--m, 1))), calc(var(--y) * var(--ky) * (1 - var(--m, 1))))
+    rotate(calc(var(--r) * (1 - var(--m, 1))))
+    scale(calc(var(--s) * (1 - 0.35 * var(--m, 1))));
+  opacity: calc(1 - var(--f, 1));
+  will-change: transform, opacity;
+}
+.desk-answer {
+  transform: translate(-50%, -50%) scale(calc(0.92 + 0.08 * var(--a, 1)));
+  opacity: var(--a, 1);
+}
+.desk-caption-before { opacity: calc(1 - var(--f, 1)); }
+.desk-caption-after { opacity: var(--a, 1); }
+
