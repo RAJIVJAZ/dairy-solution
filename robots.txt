@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /app/
+
+Sitemap: https://rajivjaz.github.io/dairy-solution/sitemap.xml
