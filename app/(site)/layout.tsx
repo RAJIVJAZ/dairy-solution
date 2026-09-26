@@ -19,14 +19,14 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         <div className="flex gap-16">
           <div className="flex flex-col gap-2">
             <span className="font-semibold text-ink">Product</span>
-            <a href="/#ledger" className="py-1 hover:text-ink">Ledger</a>
-            <a href="/#modules" className="py-1 hover:text-ink">Modules</a>
-            <a href="/#ai" className="py-1 hover:text-ink">AI agents</a>
+            <Link href="/#ledger" className="py-1 hover:text-ink">Ledger</Link>
+            <Link href="/#modules" className="py-1 hover:text-ink">Modules</Link>
+            <Link href="/#ai" className="py-1 hover:text-ink">AI agents</Link>
             <Link href="/app/" className="py-1 hover:text-ink">Open the app</Link>
           </div>
           <div className="flex flex-col gap-2">
             <span className="font-semibold text-ink">Company</span>
-            <a href="/#demo" className="py-1 hover:text-ink">Contact</a>
+            <Link href="/#demo" className="py-1 hover:text-ink">Contact</Link>
             <Link href="/design-system/" className="py-1 hover:text-ink">Design system</Link>
             <Link href="/privacy/" className="py-1 hover:text-ink">Privacy</Link>
           </div>

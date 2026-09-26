@@ -2,24 +2,53 @@
   "name": "DairyOS",
   "short_name": "DairyOS",
   "description": "Collection, plant and ledger for dairies. Works offline at village centres.",
-  "id": "/app/",
-  "start_url": "/app/",
-  "scope": "/",
+  "id": "./app/",
+  "start_url": "./app/",
+  "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#F6F3EC",
   "theme_color": "#11201B",
   "lang": "hi-IN",
-  "categories": ["business", "productivity"],
+  "categories": [
+    "business",
+    "productivity"
+  ],
   "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
-    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
   ],
   "shortcuts": [
-    { "name": "Collect milk", "url": "/app/centre/" },
-    { "name": "Plant floor", "url": "/app/factory/" },
-    { "name": "Today", "url": "/app/executive/" }
+    {
+      "name": "Collect milk",
+      "url": "./app/centre/"
+    },
+    {
+      "name": "Plant floor",
+      "url": "./app/factory/"
+    },
+    {
+      "name": "Today",
+      "url": "./app/executive/"
+    }
   ]
 }

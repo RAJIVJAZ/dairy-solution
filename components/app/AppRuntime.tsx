@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { BASE } from '@/lib/base';
 import { queuedCount, useDevice } from '@/lib/store';
 
 /**
@@ -10,7 +11,7 @@ import { queuedCount, useDevice } from '@/lib/store';
 export function AppRuntime() {
   useEffect(() => {
     if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(() => {
+      navigator.serviceWorker.register(`${BASE}/sw.js`).catch(() => {
         /* the app still works online without it */
       });
     }

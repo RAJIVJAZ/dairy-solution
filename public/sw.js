@@ -7,7 +7,9 @@
  * offline from then on.
  */
 const VERSION = 'dairyos-v1';
-const PAGES = [
+// '' at a domain root, '/dairy-solution' on GitHub Pages: taken from where this worker lives.
+const BASE = new URL(self.registration.scope).pathname.replace(/\/$/, '');
+const ROUTES = [
   '/',
   '/app/',
   '/app/farmer/',
@@ -25,7 +27,8 @@ const PAGES = [
   '/app/executive/',
   '/app/ledger/',
 ];
-const EXTRA = ['/manifest.webmanifest', '/icon.svg', '/icon-192.png', '/icon-512.png'];
+const PAGES = ROUTES.map((p) => BASE + p);
+const EXTRA = ['/manifest.webmanifest', '/icon.svg', '/icon-192.png', '/icon-512.png'].map((p) => BASE + p);
 
 async function precache() {
   const cache = await caches.open(VERSION);
@@ -37,7 +40,7 @@ async function precache() {
         if (!res.ok) return;
         await cache.put(page, res.clone());
         const html = await res.text();
-        for (const m of html.matchAll(/\/_next\/static\/[^"'\s)\\]+/g)) assets.add(m[0]);
+        for (const m of html.matchAll(/(?:\/[\w-]+)*\/_next\/static\/[^"'\s)\\]+/g)) assets.add(m[0]);
         // The router fetches each page's payload on client-side navigation.
         const payload = `${page}index.txt`;
         const p = await fetch(payload).catch(() => null);
@@ -52,7 +55,7 @@ async function precache() {
     css.map(async (href) => {
       try {
         const text = await (await fetch(href)).text();
-        for (const m of text.matchAll(/\/_next\/static\/media\/[^"')\s]+/g)) assets.add(m[0]);
+        for (const m of text.matchAll(/(?:\/[\w-]+)*\/_next\/static\/media\/[^"')\s]+/g)) assets.add(m[0]);
       } catch (e) {
         /* ignore */
       }
@@ -88,12 +91,12 @@ self.addEventListener('fetch', (event) => {
           caches.open(VERSION).then((c) => c.put(url.pathname, copy));
           return res;
         })
-        .catch(async () => (await caches.match(url.pathname)) || (await caches.match('/app/')) || Response.error()),
+        .catch(async () => (await caches.match(url.pathname)) || (await caches.match(BASE + '/app/')) || Response.error()),
     );
     return;
   }
 
-  if (url.pathname.startsWith('/_next/static/')) {
+  if (url.pathname.startsWith(BASE + '/_next/static/')) {
     event.respondWith(
       caches.match(req).then(
         (hit) =>

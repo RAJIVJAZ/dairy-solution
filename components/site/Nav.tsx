@@ -29,18 +29,18 @@ export function Nav() {
         </Link>
         <div className="hidden gap-9 text-[15px] text-body lg:flex">
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href} className="transition-colors hover:text-ink">
+            <Link key={l.href} href={l.href} className="transition-colors hover:text-ink">
               {l.label}
-            </a>
+            </Link>
           ))}
         </div>
         <div className="flex items-center gap-3">
           <Link href="/app/" className="hidden px-2 py-3 text-[15px] text-body hover:text-ink sm:inline">
             Sign in
           </Link>
-          <a href="/#demo" className="btn-primary hidden !px-5 sm:inline-flex">
+          <Link href="/#demo" className="btn-primary hidden !px-5 sm:inline-flex">
             Book a plant walkthrough
-          </a>
+          </Link>
           <button
             type="button"
             className="inline-flex h-11 w-11 items-center justify-center rounded-control border border-line lg:hidden"
@@ -58,9 +58,9 @@ export function Nav() {
           <ul className="flex flex-col">
             {LINKS.map((l) => (
               <li key={l.href}>
-                <a href={l.href} onClick={() => setOpen(false)} className="flex min-h-[48px] items-center border-b border-line text-[17px]">
+                <Link href={l.href} onClick={() => setOpen(false)} className="flex min-h-[48px] items-center border-b border-line text-[17px]">
                   {l.label}
-                </a>
+                </Link>
               </li>
             ))}
             <li>
@@ -69,9 +69,9 @@ export function Nav() {
               </Link>
             </li>
           </ul>
-          <a href="/#demo" onClick={() => setOpen(false)} className="btn-primary mt-5 w-full">
+          <Link href="/#demo" onClick={() => setOpen(false)} className="btn-primary mt-5 w-full">
             Book a plant walkthrough
-          </a>
+          </Link>
         </div>
       )}
     </header>

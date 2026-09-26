@@ -77,4 +77,6 @@ With neither booking setting, the form says bookings are not connected rather th
 
 ## Deploying
 
-`npm run build` writes a fully static site to `out/`. Any static host works (Vercel, Netlify, Cloudflare Pages, GitHub Pages, S3). Serve it over HTTPS so the service worker registers and the app can be installed.
+Every push to `main` runs `.github/workflows/deploy.yml`, which tests, builds with `NEXT_PUBLIC_BASE_PATH=/dairy-solution` and publishes `out/` to the `gh-pages` branch for GitHub Pages.
+
+`npm run build` writes a fully static site to `out/`. At a domain root, leave `NEXT_PUBLIC_BASE_PATH` unset. Any static host works (Vercel, Netlify, Cloudflare Pages, GitHub Pages, S3). Serve it over HTTPS so the service worker registers and the app can be installed.

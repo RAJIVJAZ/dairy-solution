@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Fraunces, Instrument_Sans, JetBrains_Mono, Noto_Sans_Devanagari } from 'next/font/google';
+import { BASE } from '@/lib/base';
 import { SITE } from '@/lib/site';
 import './globals.css';
 
@@ -19,8 +20,8 @@ export const metadata: Metadata = {
   title: { default: `${SITE.name}: track every litre, reconcile every solid`, template: `%s | ${SITE.name}` },
   description: SITE.description,
   applicationName: SITE.name,
-  manifest: '/manifest.webmanifest',
-  icons: { icon: '/icon.svg', apple: '/apple-touch-icon.png' },
+  manifest: `${BASE}/manifest.webmanifest`,
+  icons: { icon: `${BASE}/icon.svg`, apple: `${BASE}/apple-touch-icon.png` },
   openGraph: {
     type: 'website',
     siteName: SITE.name,
